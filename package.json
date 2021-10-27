@@ -1,0 +1,42 @@
+{
+  "name": "store",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "test": "jest --runInBand ./test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^10.0.0",
+    "ejs": "~2.6.1",
+    "express": "^4.17.1",
+    "http-errors": "~1.6.3",
+    "moment": "^2.29.1",
+    "mongodb": "^4.1.0",
+    "mongodb-memory-server": "^7.3.6",
+    "mongoose": "^5.13.7",
+    "morgan": "^1.10.0",
+    "node-geocoder": "^3.27.0",
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.6.2",
+    "xml2js": "^0.4.23"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "config": {
+    "mongodbMemoryServer": {
+      "version": "4.2.3"
+    }
+  }
+}

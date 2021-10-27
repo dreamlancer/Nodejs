@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <% include partials/head %> 
+ <script type= "text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE5BBtQKQnqkMnUCWDIJfHnO9xAPrgPsM&libraries=places"></script>
+ 
+</head>
+<body>
+<% include partials/menu %>
+<div class="container-fluid bg-3 text-center">    
+  <h3>EditPage</h3><br>
+  <div class="row">
+      <div class="container" style="margin-top:20px;">
+        <div class="card-body">
+            <!-- <input type="text" id="autocomplete"/> -->
+				
+            <form action="/update" method="post">
+                <input type="hidden" name="_id" value = "<%= data[0]._id %>">
+                <div class="form-group row text-center">
+                    <div class="col-md-2"><label for="exampleInputEmail1">Id</label></div>
+                    <div class="col-md-9 col-md-offset-1"><input type="text" class="form-control" id="id" name="id" value="<%= data[0].id %>"  readonly></div>
+                </div>
+                <div class="form-group row text-center">
+                    <div class="col-md-2"><label for="exampleInputEmail1">First Name</label></div>
+                    <div class="col-md-9 col-md-offset-1"><input type="text" class="form-control" id="first_name" name="first_name" value="<%= data[0].first_name %>"  required></div>
+                </div>
+                <div class="form-group row text-center">
+                    <div class="col-md-2"><label for="exampleInputEmail1">Last Name</label></div>
+                    <div class="col-md-9 col-md-offset-1"><input type="text" class="form-control" id="last_name" name="last_name" value="<%= data[0].last_name %>"  required></div>
+                </div>
+                <div class="form-group row text-center">
+                    <div class="col-md-2"><label for="exampleInputEmail1">Contact No</label></div>
+                    <div class="col-md-9 col-md-offset-1"><input type="text" class="form-control" id="contact_no" name="contact_no" value="<%= data[0].contact_no %>"  pattern="[0-9]{10}" title="Only 10 digits" required></div>
+                </div>
+                <div class="form-group row text-center">
+                    <div class="col-md-2"><label for="exampleInputEmail1">Email</label></div>
+                    <div class="col-md-9 col-md-offset-1"><input type="email" class="form-control" id="email" name="email" value="<%= data[0].email %>"  required></div>
+                </div>
+                <div class="form-group row text-center">
+                    <div class="col-md-2"><label for="exampleInputEmail1">Street</label></div>
+                    <div class="col-md-9 col-md-offset-1"><input type="text" class="form-control" id="street" name="street" value="<%= data[0]['address'].street %>" required></div>
+                </div>
+                <div class="form-group row text-center">
+                    <div class="col-md-2"><label for="exampleInputEmail1">City</label></div>
+                    <div class="col-md-9 col-md-offset-1"><input type="text" class="form-control" id="city" name="city" value="<%= data[0]['address'].city %>"  readonly></div>
+                </div>
+                <div class="form-group row text-center">
+                    <div class="col-md-2"><label for="exampleInputEmail1">State</label></div>
+                    <div class="col-md-9 col-md-offset-1"><input type="text" class="form-control" id="state" name="state" value="<%= data[0]['address'].state %>"  readonly></div>
+                </div>
+                <div class="form-group row text-center">
+                    <div class="col-md-2"><label for="exampleInputEmail1">PostalCode</label></div>
+                    <div class="col-md-9 col-md-offset-1"><input type="text" class="form-control" id="postal_code" name="postal_code" value="<%= data[0]['address'].postal_code %>"  readonly></div>
+                </div>
+                <div class="form-group row text-center">
+                    <div class="col-md-2"><label for="exampleInputEmail1">Country</label></div>
+                    <div class="col-md-9 col-md-offset-1"><input type="text" class="form-control" id="country" name="country" value="<%= data[0]['address'].country %>"  readonly></div>
+                </div>
+                <div class="form-group row text-center">
+                    <div class="col-md-2"><label for="exampleInputEmail1">Latitude</label></div>
+                    <div class="col-md-9 col-md-offset-1"><input type="text" class="form-control" id="latitude" name="latitude" value="<%= data[0].latitude %>"  readonly></div>
+                </div>
+                <div class="form-group row text-center">
+                    <div class="col-md-2"><label for="exampleInputEmail1">Longitude</label></div>
+                    <div class="col-md-9 col-md-offset-1"><input type="text" class="form-control" id="longitude" name="longitude" value="<%= data[0].longitude %>"  readonly></div>
+                </div>
+                <div class="form-group row text-center">
+                    <div class="col-md-2"><label for="exampleInputEmail1">Date of Birth</label></div>
+                    <div class="col-md-9 col-md-offset-1"><input type="text" class="form-control" id="birthday" name="birthday" value="<%= ('0' + (new Date(data[0].birthday).getMonth()+1)).slice(-2) %>/<%= ('0' + (new Date(data[0].birthday).getDate()+1)).slice(-2) %>/<%= new Date(data[0].birthday).getFullYear()%>" ></div>
+                </div>
+                <div class="form-group row text-center">
+                    <div class="col-md-2"><label for="exampleInputEmail1">Age</label></div>
+                    <div class="col-md-9 col-md-offset-1"><input type="text" class="form-control" id="age" name="age" value="<%= data[0].age %>"  readonly></div>
+                </div>
+                <div class="table-action-row">
+                    <button class="btn btn-primary">Update</button>
+                </div>
+            </form>
+            
+
+
+        </div>
+      </div>
+
+
+  </div>
+</div>
+</body>
+<% include partials/script %>
+<script>
+// $("#birthday").datepicker({
+//     maxDate: 0
+// });
+
+// $( "#birthday" ).datepicker({dateFormat: "mm/dd/yyyy",  maxDate: new Date() });
+
+var currentDate = new Date();
+$('#birthday').datepicker({
+format: 'mm/dd/yyyy',
+autoclose:true,
+endDate: "currentDate",
+maxDate: currentDate
+}).on('changeDate', function (ev) {
+    $(this).datepicker('hide');
+});
+$('#birthday').keyup(function () {
+    if (this.value.match(/[^0-9]/g)) {
+        this.value = this.value.replace(/[^0-9^-]/g, '');
+    }
+});
+
+function initAutocomplete() {
+    address1Field = document.querySelector("#street");
+    postalField = document.querySelector("#postal_code");
+    autocomplete = new google.maps.places.Autocomplete(address1Field, {
+        componentRestrictions: { country: ["ca"] },
+        fields: ["address_components", "geometry"],
+        types: ["address"],
+    });
+    address1Field.focus();
+    autocomplete.addListener("place_changed", fillInAddress);
+}
+
+function fillInAddress() {
+    const place = autocomplete.getPlace();
+    let address1 = "";
+    let postcode = "";
+
+    for (const component of place.address_components) {
+        const componentType = component.types[0];
+
+        switch (componentType) {
+        case "street_number": {
+            address1 = `${component.long_name} ${address1}`;
+            break;
+        }
+
+        case "route": {
+            address1 += component.short_name;
+            break;
+        }
+
+        case "postal_code": {
+            postcode = `${component.long_name}${postcode}`;
+            break;
+        }
+
+        case "postal_code_suffix": {
+            postcode = `${postcode}-${component.long_name}`;
+            break;
+        }
+        case "locality":
+            document.querySelector("#city").value = component.long_name;
+            break;
+
+        case "administrative_area_level_1": {
+            document.querySelector("#state").value = component.short_name;
+            break;
+        }
+        }
+    }
+    address1Field.value = address1;
+    postalField.value = postcode;
+}
+initAutocomplete();
+</script>
+</html>
